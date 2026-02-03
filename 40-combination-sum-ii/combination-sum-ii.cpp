@@ -10,9 +10,7 @@ public:
         for(int i=idx;i<candidates.size();i++){
             if (i > idx && candidates[i] == candidates[i - 1]) continue;
 
-            if (sum + candidates[i] > target) break;
-
-            if(mp[candidates[i]]>0){
+            if(sum + candidates[i] <= target && mp[candidates[i]]>0){
                 temp.push_back(candidates[i]);
                 mp[candidates[i]]--;
                 solve(candidates,target,sum+candidates[i],i,temp,mp);
