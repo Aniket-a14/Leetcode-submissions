@@ -1,14 +1,14 @@
 class Solution {
 public:
-    void floodFill(int i, int j, vector<vector<char>>& grid, vector<vector<bool>>& visited) {
-        if(i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size() || grid[i][j] == '0' || visited[i][j]) 
+    void floodFill(int i, int j, vector<vector<char>>& grid) {
+        if(i < 0 || j < 0 || i >= grid.size() || j >= grid[0].size() || grid[i][j] == '0') 
             return;
 
-        visited[i][j] = true;
-        floodFill(i + 1, j, grid, visited);
-        floodFill(i - 1, j, grid, visited);
-        floodFill(i, j + 1, grid, visited);
-        floodFill(i, j - 1, grid, visited);
+        grid[i][j] = '0';
+        floodFill(i + 1, j, grid);
+        floodFill(i - 1, j, grid);
+        floodFill(i, j + 1, grid);
+        floodFill(i, j - 1, grid);
 
     }
 
@@ -16,11 +16,10 @@ public:
         int n = grid.size();
         int m = grid[0].size();
         int cnt = 0;
-        vector<vector<bool>> visited(n, vector<bool> (m, false));
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
-                if(grid[i][j] == '1' && visited[i][j] == false) {
-                    floodFill(i, j, grid, visited);
+                if(grid[i][j] == '1') {
+                    floodFill(i, j, grid);
                     cnt += 1;
                 }
             }
