@@ -1,14 +1,12 @@
 struct Node{
-    Node *links[26];
-    bool isEnd = false;
+    Node* links[26];
+    bool isEnd;
     Node(){
-        for(int i=0;i<26;i++) links[i] = NULL;
-        isEnd = false;
+        for(int i=0;i<26;i++) links[i]=NULL;
+        isEnd=false;
     }
 };
-
-Node *root;
-
+Node* root;
 class Trie {
 public:
     Trie() {
@@ -16,30 +14,30 @@ public:
     }
     
     void insert(string word) {
-        Node* curr = root;
+        Node* temp = root;
         for(auto ch: word){
-            if(curr->links[ch-'a'] == NULL){
-                curr->links[ch-'a'] = new Node();
+            if(temp->links[ch-'a']==NULL){
+                temp->links[ch-'a'] = new Node();
             }
-            curr = curr->links[ch-'a'];
+            temp = temp->links[ch-'a'];
         }
-        curr->isEnd = true;
+        temp->isEnd = true;
     }
     
     bool search(string word) {
-        Node * curr = root;
+        Node* temp = root;
         for(auto ch: word){
-            if(curr->links[ch-'a']==NULL) return false;
-            curr = curr->links[ch-'a'];
+            if(temp->links[ch-'a']==NULL) return false;
+            temp = temp->links[ch-'a'];
         }
-        return curr->isEnd;
+        return temp->isEnd;
     }
     
     bool startsWith(string prefix) {
-        Node * curr = root;
+        Node* temp = root;
         for(auto ch: prefix){
-            if(curr->links[ch-'a']==NULL) return false;
-            curr = curr->links[ch-'a'];
+            if(temp->links[ch-'a']==NULL) return false;
+            temp = temp->links[ch-'a'];
         }
         return true;
     }
